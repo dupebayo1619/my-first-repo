@@ -1,13 +1,19 @@
 #!/bin/bash
 
-command=/user/bin/ShellCheck
+# Define your tools in one place
+tools=("shellcheck" "net-tools")
 
-if [ -f $command ]
-then 
-   echo "$command is available,let us run it"
-else
-   echo "$command is NOT available,installing it"
-   sudo apt update && sudo apt install -y shellcheck
-fi
+echo "--- Starting System Check ---"
 
-$command
+for tool in "${tools[@]}"; do
+    # 'command -v' is the modern way to check if a program exists
+    if command -v "$tool" > /dev/null; then
+        echo "[OK] $tool is already installed."
+    else
+        echo "[MISSING] $tool is not found. Installing..."
+        # Run update once and then install
+        sudo apt update -qq && sudo apt install -y "$tool"
+    fi
+done
+
+echo "--- All tools are ready to use! ---"
