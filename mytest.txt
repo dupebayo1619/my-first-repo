@@ -1,0 +1,13 @@
+#!/bin/bash
+
+command=/user/bin/ShellCheck
+
+if [ -f $command ]
+then 
+   echo "$command is available,let us run it"
+else
+   echo "$command is NOT available,installing it"
+   sudo apt update && sudo apt install -y shellcheck
+fi
+
+$command
