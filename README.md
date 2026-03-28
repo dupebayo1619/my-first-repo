@@ -21,21 +21,48 @@ chmod +x mytest.txt
 
 ---
 
-### 🟢 Why the README is your "Resume"
-When an instructor or a future employer looks at your GitHub, the README is the first thing they see. 
-* It shows you **write documentation**, not just code.
-* It explains **why** the script exists.
-* It provides **instructions** (like `chmod +x`) so they don't have to guess how to run it.
-
-
-
----
-
 ### 🏁 Final Git Push
-Now, sync both your script and your new documentation to GitHub:
 
 ```bash
 cd ~/my-first-repo
 git add README.md mytest.txt
 git commit -m "docs: update README with script usage and features"
 git push origin main
+
+
+---
+
+## 🛠️ Htop Auto-Installer (`myscript2.sh`)
+This script automates the setup of the `htop` interactive process viewer.
+
+### What it does:
+1. Updates your package list.
+2. Installs `htop` automatically.
+3. Redirects successful installation messages to `package_install_results.log`.
+4. Redirects any errors to `package_install_failure.log`.
+
+### Usage:
+```bash
+chmod +x myscript2.sh
+./myscript2.sh
+
+
+### Step 3: Final Sync to GitHub
+
+
+1.  **Stage the update:**
+    ```bash
+    git add README.md
+    ```
+
+2.  **Commit:**
+    ```bash
+    git commit -m "Added htop documentation to main README"
+    ```
+
+3.  **Push:**
+    ```bash
+    git push origin main
+    ```
+
+
