@@ -1,19 +1,27 @@
 #!/bin/bash
 
-# Define your tools in one place
+# Define your tools
 tools=("shellcheck" "net-tools")
 
-echo "--- Starting System Check ---"
+echo "--- Starting System Audit ---"
 
 for tool in "${tools[@]}"; do
-    # 'command -v' is the modern way to check if a program exists
     if command -v "$tool" > /dev/null; then
         echo "[OK] $tool is already installed."
+        
+        # Logic: Print the version for the user
+        if [[ "$tool" == "shellcheck" ]]; then
+            shellcheck --version | grep "version:"
+        elif [[ "$tool" == "net-tools" ]]; then
+            # net-tools doesn't have a simple --version, so we check ifconfig
+            ifconfig --version | head -n 1
+        fi
     else
-        echo "[MISSING] $tool is not found. Installing..."
-        # Run update once and then install
+        echo "[MISSING] $tool not found. Installing..."
         sudo apt update -qq && sudo apt install -y "$tool"
+        echo "[FIXED] $tool has been installed."
     fi
+    echo "----------------------------"
 done
 
-echo "--- All tools are ready to use! ---"
+echo "--- Audit Complete ---"
